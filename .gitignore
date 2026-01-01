@@ -1,0 +1,5 @@
+# 此文件被.gitignore忽略
+.env
+__pycache__/
+*.pyc
+exports/*.json
