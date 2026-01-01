@@ -125,55 +125,13 @@ input_style = Style.from_dict({
 
 # === 底部状态栏生成器 (三行版) ===
 def create_status_bar(chat_session):
-    """创建三行动态状态栏闭包"""
+    """创建三行动态状态栏闭包 (读写全局仪表盘状态)"""
     from datetime import datetime
-    import re
+    from ui.dashboard import get_dashboard
     
-    # 缓存数据 (避免频繁刷新)
-    _cache = {
-        'weather_today': '',
-        'weather_tomorrow': '',
-        'news': [],
-        'fortune': {},
-        'news_index': 0,
-        'last_update': 0,
-    }
-    
-    def _strip_rich_markup(text):
-        """移除 Rich markup 标签"""
-        return re.sub(r'\[/?[^\]]*\]', '', text)
-    
-    def _refresh_data():
-        """刷新缓存数据 (每5分钟)"""
-        import time
-        now_ts = time.time()
-        if now_ts - _cache['last_update'] > 300:  # 5分钟
-            try:
-                # 天气
-                w_today, w_tomorrow = weather_fetcher.fetch()
-                _cache['weather_today'] = _strip_rich_markup(w_today) if w_today else ""
-                _cache['weather_tomorrow'] = _strip_rich_markup(w_tomorrow) if w_tomorrow else ""
-                
-                # 新闻 (使用 get_top_stories，优先显示中文摘要)
-                news_list = news_fetcher.get_top_stories(limit=3)
-                if news_list:
-                    _cache['news'] = [
-                        f"{n.get('summary') or n['title']} (🔥{n['score']})" 
-                        for n in news_list
-                    ]
-                
-                # 运势 (使用 get_daily_fortune)
-                fortune = fortune_teller.get_daily_fortune()
-                if fortune:
-                    _cache['fortune'] = fortune
-                    
-                _cache['last_update'] = now_ts
-            except Exception:
-                pass
+    dashboard = get_dashboard()
     
     def get_status_bar():
-        _refresh_data()
-        
         import time as _time
         _frame = int(_time.time()) % 4  # 动画帧 (0-3)
         
@@ -189,25 +147,36 @@ def create_status_bar(chat_session):
         now = datetime.now().strftime("%H:%M:%S")
         
         # === 第一行: 时间 + 今日天气 ===
-        weather_today = _cache.get('weather_today', '')
+        # 直接从 dashboard 读取 (由后台线程更新)
+        weather_today = dashboard.weather_today
         if weather_today:
+            # 移除可能存在的 API 格式代码 (如果有)
+            import re
+            weather_today = re.sub(r'\[/?[^\]]*\]', '', weather_today)
             line1 = f'{clock_icon} {now} │ {weather_today}'
         else:
             line1 = f'{clock_icon} {now} │ {weather_icon} 天气加载中...'
         
         # === 第二行: 明日天气 (独立一行) ===
-        weather_tomorrow = _cache.get('weather_tomorrow', '')
+        weather_tomorrow = dashboard.weather_tom
         if weather_tomorrow:
+            weather_tomorrow = re.sub(r'\[/?[^\]]*\]', '', weather_tomorrow)
             line2 = f'{calendar_icon} {weather_tomorrow}'
         else:
             line2 = f'{calendar_icon} 明日天气加载中...'
         
         # === 第三行: 新闻滚动 (跑马灯效果) ===
-        news_list = _cache.get('news', [])
+        news_list = dashboard.news_list
         if news_list:
             import time
+            # 提取新闻标题/摘要
+            news_texts = [
+                f"{n.get('summary') or n['title']} (🔥{n['score']})" 
+                for n in news_list
+            ]
+            
             # 拼接所有新闻为一个长字符串
-            all_news = "  ★  ".join(news_list)
+            all_news = "  ★  ".join(news_texts)
             # 添加尾部填充，形成循环
             display_width = 80  # 显示宽度
             ticker_text = all_news + "  ★  " + all_news[:display_width]
@@ -221,7 +190,7 @@ def create_status_bar(chat_session):
             line3 = '📰 新闻加载中...'
         
         # === 第四行: 星座 + 宜忌 ===
-        fortune = _cache.get('fortune', {})
+        fortune = dashboard.fortune_data
         if fortune:
             line4 = (
                 f"🔮 {fortune.get('sign', '')} {fortune.get('stars', '')} │ "
@@ -301,6 +270,13 @@ async def run_async_chat(chat, cmd_handler):
 
     # 4. 后台数据刷新任务 (低频，且只在 IDLE 时更新)
     async def data_refresh_loop():
+        # 初始加载延迟 1 秒，避免争抢启动资源
+        await asyncio.sleep(1)
+        try:
+             await asyncio.to_thread(dashboard.refresh_data)
+        except:
+             pass
+
         while True:
             try:
                 await asyncio.sleep(60 * 5)

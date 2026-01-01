@@ -65,10 +65,21 @@ class AnimatedDashboard:
         self.thinking_colors = ["deep_sky_blue1", "magenta", "cyan1", "purple", "bright_cyan"]
         
     def refresh_data(self):
-        """刷新所有数据"""
-        self.weather_today, self.weather_tom = weather_fetcher.fetch()
-        self.news_list = news_fetcher.get_top_stories(limit=5)
-        self.fortune_data = fortune_teller.get_daily_fortune()
+        """刷新所有数据 (线程运行)"""
+        try:
+            self.weather_today, self.weather_tom = weather_fetcher.fetch()
+        except Exception:
+            pass
+            
+        try:
+            self.news_list = news_fetcher.get_top_stories(limit=5)
+        except Exception:
+            pass
+            
+        try:
+            self.fortune_data = fortune_teller.get_daily_fortune()
+        except Exception:
+            pass
         
     def set_status_message(self, msg: str):
         """设置 AI 自发消息"""
@@ -238,8 +249,7 @@ def get_dashboard() -> AnimatedDashboard:
     global _dashboard
     if _dashboard is None:
         _dashboard = AnimatedDashboard()
-    if not _dashboard.weather_today: # 首次加载数据
-        _dashboard.refresh_data()
+    # 移除同步阻塞调用，改为由 main.py 的后台 loop 负责
     return _dashboard
 
 def display_home(model_name: str = "gemini-2.5-flash", animate_duration: float = 2.0):
