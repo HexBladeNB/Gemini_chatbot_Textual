@@ -6,7 +6,7 @@
 
 一个专为极客打造的高性能、沉浸式命令行聊天机器人。集成了 **Google Gemini** 与 **DeepSeek** 双引擎，拥有炫酷的动态仪表盘、实时资讯流和极致的交互体验。
 
-![Screenshot](https://via.placeholder.com/800x450.png?text=Gemini+CLI+Dashboard+Preview)
+![Screenshot](screenshot/封面.jpg)
 *(此处可替换为项目实际运行截图)*
 
 ## ✨ 核心特性
@@ -64,15 +64,15 @@ python main.py
 
 在对话过程中，随时输入 `/` 呼出命令菜单：
 
-| 指令 | 功能描述 |
-| :--- | :--- |
-| `/help` | 📖 显示完整的帮助菜单 |
-| `/model` | 🔧 切换 AI 模型 (Gemini / DeepSeek) |
-| `/check` | 🏥 运行全能模型体检脚本 (网络/API诊断) |
-| `/weather` | 🌤️ 强制刷新天气数据 |
-| `/refresh` | 🔄 也是清屏，彻底重绘 UI |
-| `/save` | 💾 手动保存当前对话记录 |
-| `/exit` | 👋 安全退出程序 |
+| 指令       | 功能描述                              |
+| :--------- | :------------------------------------ |
+| `/help`    | 📖 显示完整的帮助菜单                  |
+| `/model`   | 🔧 切换 AI 模型 (Gemini / DeepSeek)    |
+| `/check`   | 🏥 运行全能模型体检脚本 (网络/API诊断) |
+| `/weather` | 🌤️ 强制刷新天气数据                    |
+| `/refresh` | 🔄 也是清屏，彻底重绘 UI               |
+| `/save`    | 💾 手动保存当前对话记录                |
+| `/exit`    | 👋 安全退出程序                        |
 
 ## 📂 项目结构
 
