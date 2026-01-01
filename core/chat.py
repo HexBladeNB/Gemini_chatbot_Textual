@@ -292,7 +292,8 @@ class ChatSession:
                         model=self.model_name, contents=self.history,
                         config=types.GenerateContentConfig(
                             system_instruction=SYSTEM_INSTRUCTION,
-                            tools=[types.Tool(google_search=types.GoogleSearch())]
+                            tools=[types.Tool(google_search=types.GoogleSearch())],
+                            temperature=0.7
                         )
                     )
 
@@ -395,7 +396,8 @@ class ChatSession:
                                 model=self.model_name, contents=self.history,
                                 config=types.GenerateContentConfig(
                                     system_instruction=SYSTEM_INSTRUCTION,
-                                    tools=[types.Tool(google_search=types.GoogleSearch())]
+                                    tools=[types.Tool(google_search=types.GoogleSearch())],
+                                    temperature=0.7
                                 )
                             )
                         
