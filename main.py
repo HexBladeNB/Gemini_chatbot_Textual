@@ -225,27 +225,30 @@ async def run_async_chat(chat, cmd_handler):
     # 1. 初始化 Prompt Session (语法高亮 + 动态状态栏 + 自动补全)
     from prompt_toolkit.completion import WordCompleter
     from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
-    
-    # 指令补全器
-    command_completer = WordCompleter([
-        '/help', '/model', '/check', '/weather', '/refresh', '/save', '/speed', '/exit', 
-        'exit', 'quit'
-    ], ignore_case=True)
-
     from prompt_toolkit.key_binding import KeyBindings
-
-    # 前面已导入 WordCompleter 等...
+    from commands.handler import COMMANDS
+    
+    # 从 COMMANDS 字典动态生成补全列表 (排除分隔符)
+    command_list = [cmd for cmd in COMMANDS.keys() if not cmd.startswith("---")]
+    command_list.extend(['exit', 'quit', 'q'])  # 额外退出命令
+    command_completer = WordCompleter(command_list, ignore_case=True)
     
     # === 自定义快捷键 ===
     bindings = KeyBindings()
 
     @bindings.add("tab")
     def _(event):
-        """Tab 键仅用于接受补全建议 (AutoSuggest)"""
+        """Tab 键: 优先接受补全菜单选项，其次接受历史建议"""
         b = event.current_buffer
-        if b.suggestion:
+        # 如果有补全菜单且有选中项，接受补全
+        if b.complete_state and b.complete_state.current_completion:
+            b.apply_completion(b.complete_state.current_completion)
+        # 否则如果有历史建议 (灰色提示)，接受建议
+        elif b.suggestion:
             b.insert_text(b.suggestion.text)
-        # 不再绑定菜单触发，菜单会自动弹出或通过方向键交互
+        # 都没有则触发补全菜单
+        else:
+            b.start_completion(select_first=False)
 
     session = PromptSession(
         lexer=ChatInputLexer(),
@@ -253,7 +256,7 @@ async def run_async_chat(chat, cmd_handler):
         bottom_toolbar=create_status_bar(chat),
         refresh_interval=0.2,
         completer=command_completer,
-        complete_while_typing=True,  # 输入时自动弹出菜单 (列表可有可无，用方向键选)
+        complete_while_typing=True,  # 输入 / 时自动弹出菜单
         auto_suggest=AutoSuggestFromHistory(),
         key_bindings=bindings,
     )

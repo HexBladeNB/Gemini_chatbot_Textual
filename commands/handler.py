@@ -129,7 +129,15 @@ class CommandHandler:
                 table.add_row(f"[bold]{cmd}[/]", "", end_section=True)
             else:
                 table.add_row(cmd, desc)
+        
+        # 添加键盘操作说明
+        table.add_section()
+        table.add_row("[bold]--- 键盘操作 ---[/]", "", end_section=True)
+        table.add_row("[dim]Tab[/]", "接受补全/历史建议")
+        table.add_row("[dim]↑/↓[/]", "选择补全项/历史记录")
+        table.add_row("[dim]Ctrl+C[/]", "取消当前输入")
+        table.add_row("[dim]Ctrl+D[/]", "退出程序")
                 
-        # console.print(Panel(table, title="[bold]🛠️ 快捷指令系统[/]", border_style="cyan"))
         console.print("[bold cyan]🛠️ 快捷指令系统[/]")
         console.print(table)
+
