@@ -1,106 +1,104 @@
 # 🗡️ 六脉神剑真厉害 (Cyberpunk Gemini CLI)
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
-![Textual](https://img.shields.io/badge/framework-Textual-green.svg)
-![Gemini](https://img.shields.io/badge/AI-Gemini_2.0-magenta.svg)
+<div align="center">
+  <img src="screenshot/封面.jpg" width="800" alt="Cyberpunk Chatbot Header">
+  
+  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+  [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
+  [![Textual](https://img.shields.io/badge/framework-Textual-green.svg)](https://github.com/Textualize/textual)
+  [![Gemini](https://img.shields.io/badge/AI-Gemini_2.0-magenta.svg)](https://ai.google.dev/)
+  [![Zhipu](https://img.shields.io/badge/AI-GLM--4-orange.svg)](https://bigmodel.cn/)
+</div>
 
-> **"赛博朋克风格的终端 AI 助手，集成实时系统监控与生活服务。"**
+---
 
-这是一个基于 Python **Textual** 框架构建的高级 TUI (终端用户界面) 应用。它不仅是一个支持流式对话的 AI 聊天机器人，更是一个集成了系统仪表盘、天气预报、科技新闻和极客运势的综合生产力工作台。
+> **"赛博朋克风格的终端 AI 助手，集成双引擎驱动与极客工作台。"**
 
-## ✨ 核心特性
+这是一个基于 Python **Textual** 框架构建的高级 TUI (终端用户界面) 应用。它不仅支持流式对话，更是一个集成了系统监控、人格注入与多主题热切换的深夜极客伴侣。
 
-### 🤖 强力 AI 核心
-*   **多模型切换**: 支持 `gemini-2.5-flash`, `gemini-flash-latest` 等最新模型。
-*   **流式响应**: 类似黑客电影的打字机输出效果。
-*   **记忆对话**: 具备完整的上下文多轮对话能力。
-*   **智能重连**: 内置 API Key 轮询与自动重试机制，抗网络抖动。
+## 🌟 核心亮点
 
-### 🎨 沉浸式体验
-*   **赛博朋克 UI**: 高对比度极客风格，支持 **Catppuccin** 四色主题 (Latte/Frappe/Macchiato/Mocha) 一键热切换。
-*   **内联输入**: 真正的终端命令行体验，支持多行编辑。
-*   **动态特效**: 包含 AI 思考波纹、故障风 (Glitch) 文本特效。
+### 🚀 双引擎极速响应 (Zhipu GLM + Google Gemini)
+- **智能双待**：内置 **智谱 GLM-4** 与 **Google Gemini** 双 API 引擎。
+- **自动灾备**：主服务连接失败时，秒级自动切换至备用引擎，确保对话不中断。
+- **人格注入**：内置“六脉神剑”极客助手人格，默认启用技术精湛且带有个性化吐槽风格的系统指令。
 
-### 🛠️ 极客工具箱 (Dashboard)
-*   **📊 系统监控**: 实时可视化 CPU、内存、GPU (NVIDIA)、磁盘 I/O 和网络流量。
-*   **☁️ 实时天气**: 集成 Open-Meteo，提供精确到分钟的本地天气与明日预报。
-*   **📰 科技新闻**: 自动抓取 Google News 科技版块，AI 自动翻译标题，滚动播报。
-*   **🔮 每日运势**: 程序员专属运势 (宜重构、忌上线)，每天根据哈希种子生成。
+### 🎨 深度定制的 TUI 美学
+- **故障风 (Glitch) 渲染**：AI 回复过程伴随酷炫的解码动画。
+- **Catppuccin 主题**：支持 Mocha、Macchiato、Frappe、Latte 四种专业色彩风味，`F12` 一键实时无损切换。
+- **精致控件**：精心调优的滚动条交互（带悬停反馈）与完美对齐的快捷键菜单。
 
-## 🚀 快速开始
+### 🛠️ 生产力极客工具
+- **代码导出**：支持 `/save` 指令一键提取 AI 回复中的所有代码块并保存为本地文件。
+- **热重载开发**：内置 `dev.py` 监控，支持代码修改后应用自动重载（Hot Reload），开发体验拉满。
+- **内联式输入**：真正的命令行交互，支持多行输入与历史记录导航。
 
-### 1. 环境准备
-确保你的系统安装了 Python 3.10 或更高版本。
+## � 快速部署
 
-```bash
+### 1. 环境构建
+确保 Python 3.10+ 环境，推荐使用 PowerShell 环境运行：
+
+```powershell
 # 克隆项目
-git clone https://github.com/your-repo/gemini-chatbot-textual.git
-cd gemini-chatbot-textual
+git clone https://github.com/HexBladeNB/Gemini_chatbot_Textual.git
+cd Gemini_chatbot_Textual
 
-# 创建虚拟环境 (推荐)
+# 初始化虚拟环境
 python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# Linux/Mac
-source .venv/bin/activate
-
-# 安装依赖
+.venv\Scripts\Activate.ps1   # Windows
 pip install -r requirements.txt
 ```
 
-### 2. 配置 API Key
-在项目根目录创建或修改 `config/settings.py` (或设置环境变量)，填入你的 Google Gemini API Key。
+### 2. 核心配置
+编辑根目录下的 `.env` 文件：
 
-### 3. 启动应用
-```bash
-python app.py
+```env
+GEMINI_API_KEY=你的谷歌密钥
+ZHIPU_API_KEY=你的智谱密钥
+
+# 可选配置
+PRIMARY_SERVICE=zhipu        # 默认主服务: zhipu 或 gemini
+ENABLE_WEB_SEARCH=true       # 开启智谱联网搜索
 ```
 
-## ⌨️ 操作指南
+### 3. 热力驱动
+```powershell
+# 直接启动应用
+python app.py
 
-应用支持 **Slash 指令** 和 **快捷键** 两种操作方式。
+# 开发模式（修改代码自动热重启）
+python dev.py
+```
 
-| 功能 | 指令 | 快捷键 | 说明 |
-| :--- | :--- | :--- | :--- |
-| **发送消息** | (直接输入) | `Enter` | 发送对话 |
-| **换行** | - | `Shift+Enter` | 输入框换行 |
-| **切换模型** | `/model` | - | 轮换 Gemini 模型 |
-| **切换服务** | `/service` | `Ctrl+D` | 切换主备服务 (GLM/Gemini) |
-| **切换主题** | `/theme` | `F12` | 轮换 Catppuccin 配色 |
-| **调整速度** | `/speed` | `Ctrl+S` | 调整打字机输出速度 |
-| **清屏** | `/clear` | `F2` | 清空屏幕日志 |
-| **重置** | `/reset` | `F5` | 清空屏幕 + **遗忘记忆** |
-| **帮助** | `/help` | - | 显示帮助菜单 |
-| **退出** | `/quit` | `Ctrl+Q` | 退出程序 |
+## ⌨️ 快捷指令菜单
 
-## 📂 项目结构
+| 动作         | 快捷键   | Slash 指令 | 说明                           |
+| :----------- | :------- | :--------- | :----------------------------- |
+| **发送消息** | `Enter`  | -          | 提交对话内容                   |
+| **切换服务** | `Ctrl+D` | `/service` | 在主/备引擎间热切换            |
+| **切换模型** | -        | `/model`   | 轮换当前引擎下的可用模型       |
+| **导出代码** | -        | `/save`    | 自动抓取最后一段 AI 代码块存盘 |
+| **切换主题** | `F12`    | `/theme`   | 轮换 Catppuccin 界面风格       |
+| **调整速度** | `Ctrl+S` | `/speed`   | 切换打字机输出频率             |
+| **重置会话** | `F5`     | `/reset`   | 瞬间擦除记忆与屏幕             |
+| **清空屏幕** | `F2`     | `/clear`   | 仅清理历史显示区域             |
+| **退出系统** | `Ctrl+Q` | `/quit`    | 安全关闭神经连接               |
+
+## 🏗️ 架构布局
 
 ```text
-E:\Gemini CLI 实战\Gemini_chatbot- Textual\
-├── app.py                # 主程序入口
-├── core/                 # 核心逻辑
-│   ├── chat.py           # (旧版) CLI 对话逻辑
-│   └── client.py         # Gemini 客户端封装
-├── services/             # 服务层
-│   └── gemini_service.py # AI 服务 (流式处理/历史管理)
-├── ui/                   # (旧版) UI 组件
-├── widgets/              # Textual UI 组件
-│   ├── message_log.py    # 消息列表与输入框
-│   ├── status_bar.py     # 底部多功能状态栏
-│   └── glitch_label.py   # 特效标签
-├── utils/                # 工具库
-│   ├── system_monitor.py # 系统硬件监控
-│   ├── weather.py        # 天气 API
-│   ├── news.py           # 新闻 RSS + 翻译
-│   └── fortune.py        # 运势算法
-├── styles/               # CSS 样式表 (TCSS)
-└── themes_cloned/        # Catppuccin 主题资源
+Gemini_chatbot- Textual/
+├── app.py                # 系统中枢
+├── dev.py                # 自动热重载调度器
+├── services/             # API 引擎封装 (Gemini/Zhipu)
+├── widgets/              # 自定义 UI 控件 (内联输入器/故障风标签)
+├── styles/               # TUI 样式表 (TCSS + Catppuccin)
+├── config/               # 系统与人格定义
+└── screenshot/           # 视觉档案
 ```
 
-## 🤝 贡献
-欢迎提交 Issue 或 PR！
-特别感谢 [Textual](https://github.com/Textualize/textual) 和 [Rich](https://github.com/Textualize/rich) 提供的底层支持。
+## 📜 LICENSE
+MIT License. Created by [HexBladeNB](https://github.com/HexBladeNB).
 
-## 📜 许可证
-MIT License
+---
+<p align="center">"Talk is cheap. Show me the code."</p>
