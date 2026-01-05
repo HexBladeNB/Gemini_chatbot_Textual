@@ -1,7 +1,7 @@
 # 🗡️ 六脉神剑真厉害 (Cyberpunk Gemini CLI)
 
 <div align="center">
-  <img src="screenshot/封面.jpg" width="800" alt="Cyberpunk Chatbot Header">
+  <img src="screenshot/封面.png" width="800" alt="Cyberpunk Chatbot Header">
   
   [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
   [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
