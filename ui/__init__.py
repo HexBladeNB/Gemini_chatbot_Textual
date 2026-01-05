@@ -1,3 +1,2 @@
-# UI Module
-from .layout import TerminalLayout
-from .widgets import WidgetManager, update_widget
+# UI Module (Textual)
+# 旧的 dashboard 已弃用，现使用 Textual widgets

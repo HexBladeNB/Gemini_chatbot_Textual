@@ -1,0 +1,114 @@
+/* 
+ * Catppuccin Mocha 主题 - Gemini 聊天机器人
+ * 适合 Type-C 接口下方的优雅输入体验
+ */
+
+/* === Catppuccin Mocha 色板 === */
+$bg-dark: #1e1e2e;
+$bg-panel: #181825;
+$fg-main: #cdd6f4;
+$comment: #6c7086;
+$purple: #cba6f7;
+$pink: #f5c2e7;
+$cyan: #89dceb;
+$green: #a6e3a1;
+$orange: #fab387;
+$red: #f38ba8;
+$yellow: #f9e2af;
+
+/* 高亮色 - 使用更亮的变体或邻近色 */
+$bright-purple: #b4befe; /* Lavender */
+$bright-cyan: #94e2d5;   /* Teal */
+$bright-green: #a6e3a1;  /* Green (keeping same as main green usually bright enough) */
+
+/* === 全局样式 === */
+Screen {
+    background: $bg-dark;
+    color: $fg-main;
+}
+
+/* === Header 极简 === */
+Header {
+    background: $bg-panel;
+    color: $purple;
+    text-style: bold;
+    dock: top;
+    height: 1;
+}
+
+HeaderTitle {
+    color: $purple;
+}
+
+/* === 消息列表区域 - 无边框 === */
+#message-log {
+    background: $bg-dark;
+    border: none;
+    height: 1fr;
+    scrollbar-color: $comment;
+    scrollbar-background: $bg-dark;
+    padding: 0 1;
+}
+
+/* === 用户消息 - 极简 === */
+.user-bubble {
+    background: transparent;
+    border: none;
+    color: $pink;
+    margin: 0;
+    padding: 0 1;
+}
+
+/* === AI 消息 - 极简 === */
+.ai-bubble {
+    background: transparent;
+    border: none;
+    color: $cyan;
+    margin: 0;
+    padding: 0 1;
+}
+
+/* === 系统消息 === */
+.system-bubble {
+    background: transparent;
+    border: none;
+    color: $comment;
+    margin: 0;
+    padding: 0 1;
+    text-style: italic;
+}
+
+/* === 错误消息 === */
+.error-bubble {
+    color: $red;
+}
+
+/* === 内联输入框 - 优化 Type-C 区域体验 === */
+.inline-input {
+    background: transparent;
+    border: none;
+    color: $green;
+    height: auto;
+    min-height: 1;
+    padding: 0 1;
+}
+
+.inline-input:focus {
+    /* 使用 Surface0 让输入框在深色背景中柔和凸显 */
+    background: #313244; 
+}
+
+.inline-input > .input--placeholder {
+    color: $comment;
+}
+
+/* === 状态栏 - 多行插件区 === */
+#status-bar {
+    dock: bottom;
+    height: 6;
+    background: $bg-panel;
+    color: $fg-main;
+    padding: 0 1;
+    border-top: solid $comment;
+    text-wrap: nowrap;
+}

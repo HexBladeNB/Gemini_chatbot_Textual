@@ -1,4 +1,10 @@
 google-genai
+zhipuai>=2.0.0
 rich
 python-dotenv
 openai
+textual>=0.52.0
+psutil
+feedparser
+GPUtil
+watchdog

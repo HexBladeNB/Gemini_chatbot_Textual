@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(del:*)",
+      "Bash(git add:*)",
+      "mcp__web-search-prime__webSearchPrime",
+      "WebSearch",
+      "mcp__web-reader__webReader",
+      "Bash(pip show:*)",
+      "Bash(python:*)",
+      "Bash(echo:*)",
+      "Bash(powershell -Command \"Get-ChildItem Env:ZHIPU_API_KEY -ErrorAction SilentlyContinue\":*)",
+      "Bash(powershell:*)"
+    ]
+  }
+}

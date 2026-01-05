@@ -1,3 +1,7 @@
 # Utils module
-from .storage import save_conversation, load_conversation, auto_save, load_last_session, has_last_session, clear_last_session, check_token_limit
+# 原有模块已移至 /参考代码 文件夹
+
+from .logger import get_logger, debug, info, warning, error, exception
+
+__all__ = ["get_logger", "debug", "info", "warning", "error", "exception"]
 

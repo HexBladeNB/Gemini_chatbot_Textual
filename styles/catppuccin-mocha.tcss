@@ -1,0 +1,14 @@
+.theme-mocha {
+    --bg-dark: #1e1e2e;
+    --bg-panel: #181825;
+    --fg-main: #cdd6f4;
+    --comment: #6c7086;
+    --purple: #cba6f7;
+    --pink: #f5c2e7;
+    --cyan: #89dceb;
+    --green: #a6e3a1;
+    --orange: #fab387;
+    --red: #f38ba8;
+    --yellow: #f9e2af;
+    --surface0: #313244;
+}

@@ -70,7 +70,7 @@ class WeatherFetcher:
             if time.time() - data.get('timestamp', 0) > CACHE_TTL:
                 return None
             return data
-        except:
+        except (json.JSONDecodeError, OSError, KeyError):
             return None
     
     def _save_cache(self, today: str, tomorrow: str):
@@ -82,8 +82,8 @@ class WeatherFetcher:
                     'today': today,
                     'tomorrow': tomorrow
                 }, f, ensure_ascii=False)
-        except:
-            pass
+        except (OSError, IOError):
+            pass  # 缓存保存失败不影响主流程
     
     def _get_weather_text(self, code: int) -> str:
         """WMO 代码转中文"""

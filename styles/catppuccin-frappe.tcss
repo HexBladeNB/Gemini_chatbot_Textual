@@ -1,0 +1,14 @@
+.theme-frappe {
+    --bg-dark: #303446;
+    --bg-panel: #292c3c;
+    --fg-main: #c6d0f5;
+    --comment: #737994;
+    --purple: #ca9ee6;
+    --pink: #f4b8e4;
+    --cyan: #99d1db;
+    --green: #a6d189;
+    --orange: #ef9f76;
+    --red: #e78284;
+    --yellow: #e5c890;
+    --surface0: #414559;
+}

@@ -6,7 +6,7 @@ from config.settings import load_api_keys, setup_proxy
 from rich.console import Console
 import random
 
-console = Console()
+console = Console(stderr=True)
 
 class ClientPool:
     """Gemini 客户端池 - 支持 429 时自动轮换 Key"""

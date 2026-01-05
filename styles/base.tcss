@@ -1,0 +1,45 @@
+/* 
+ * 基础样式 - Gemini 聊天机器人
+ * 仅包含布局和结构，颜色由主题文件控制
+ */
+
+/* === Header 极简 === */
+Header {
+    dock: top;
+    height: 1;
+    text-style: bold;
+}
+
+/* === 消息列表区域 === */
+#message-log {
+    border: none;
+    height: 1fr;
+    padding: 0 1;
+}
+
+/* === 消息气泡基础布局 === */
+.user-bubble, .ai-bubble, .system-bubble {
+    border: none;
+    margin: 0;
+    padding: 0 1;
+}
+
+.system-bubble {
+    text-style: italic;
+}
+
+/* === 内联输入框 === */
+.inline-input {
+    border: none;
+    height: auto;
+    min-height: 1;
+    padding: 0 1;
+}
+
+/* === 状态栏 === */
+#status-bar {
+    dock: bottom;
+    height: 4;
+    padding: 0 1;
+    text-wrap: nowrap;
+}

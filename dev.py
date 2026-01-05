@@ -1,103 +1,148 @@
 """
-开发专用启动器 - 支持热重载 (Hot Reload)
-当检测到代码修改时，自动彻底重启主程序，无需手动关闭再打开。
+六脉神剑 - 极客热重载启动器 (Geek Hot-Reloader)
+使用 watchdog 监控文件变化，自动重启应用。
+支持 Rich 美化输出，智能防抖。
 """
-import os
 import sys
 import time
 import subprocess
+import signal
+import os
 from pathlib import Path
+from rich.console import Console
+from rich.panel import Panel
+from rich.live import Live
+from rich.spinner import Spinner
+from rich.text import Text
 
-# 监控的文件扩展名
-EXTENSIONS = {'.py', '.env'}
-# 忽略的目录
-# 忽略的目录 (全小写比较)
-IGNORE_DIRS = {'__pycache__', '.git', '.gemini', 'exports', 'data', 'venv', 'env', '.idea', '.vscode'}
+try:
+    from watchdog.observers import Observer
+    from watchdog.events import FileSystemEventHandler
+except ImportError:
+    print("❌ 缺少 watchdog 库。请运行: pip install watchdog")
+    sys.exit(1)
 
-def get_file_mtimes(root_dir):
-    """获取所有受监控文件的修改时间"""
-    mtimes = {}
-    for root, dirs, files in os.walk(root_dir):
-        # 过滤忽略的目录 (不区分大小写)
-        dirs[:] = [d for d in dirs if d.lower() not in IGNORE_DIRS]
+# 配置
+PROJECT_DIR = Path(__file__).parent.resolve()
+WATCH_EXTENSIONS = {".py", ".tcss", ".css", ".json", ".env"}
+IGNORE_DIRS = {".git", ".venv", "__pycache__", ".idea", ".vscode", "logs", "screenshot", "doc"}
+DEBOUNCE_DELAY = 1.0  # 防抖延迟 (秒) - 稍微调大一点保证文件写入完成
+
+console = Console()
+
+class HotReloader(FileSystemEventHandler):
+    """智能热重载处理器"""
+
+    def __init__(self):
+        self.process = None
+        self.last_change_time = 0
+        self.needs_restart = True  # 初始启动
+        self.running = True
+
+    def _kill_process(self):
+        """优雅地杀死子进程"""
+        if self.process:
+            try:
+                # Windows 使用 taskkill 确保杀死进程树
+                if sys.platform == "win32":
+                    subprocess.run(
+                        ["taskkill", "/F", "/T", "/PID", str(self.process.pid)],
+                        capture_output=True,
+                        check=False
+                    )
+                else:
+                    os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
+            except Exception:
+                pass
+            self.process = None
+
+    def restart_application(self):
+        """重启应用"""
+        self._kill_process()
         
-        for file in files:
-            ext = os.path.splitext(file)[1]
-            if ext in EXTENSIONS:
-                path = os.path.join(root, file)
-                try:
-                    mtime = os.stat(path).st_mtime
-                    mtimes[path] = mtime
-                except OSError:
-                    continue
-    return mtimes
+        console.print(Panel(
+            Text("🔄 正在加载神经连接...", style="bold yellow"),
+            border_style="yellow",
+            padding=(0, 2)
+        ))
+
+        env = os.environ.copy()
+        env["PYTHONUNBUFFERED"] = "1"  # 确保子进程立即输出
+
+        try:
+            # 启动子进程
+            kwargs = {}
+            if sys.platform == "win32":
+                kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+            else:
+                kwargs["preexec_fn"] = os.setsid
+
+            self.process = subprocess.Popen(
+                [sys.executable, "app.py"],
+                cwd=PROJECT_DIR,
+                env=env,
+                **kwargs
+            )
+        except Exception as e:
+            console.print(f"[bold red]❌ 启动失败:[/bold red] {e}")
+
+    def on_modified(self, event):
+        """文件变更回调"""
+        if event.is_directory:
+            return
+
+        path = Path(event.src_path)
+        
+        # 检查忽略目录
+        if any(p in path.parts for p in IGNORE_DIRS):
+            return
+
+        # 检查扩展名
+        if path.suffix not in WATCH_EXTENSIONS:
+            return
+
+        # 记录变更
+        current_time = time.time()
+        # 简单防抖：如果距离上次变更很近，只更新时间
+        self.last_change_time = current_time
+        self.needs_restart = True
+        
+        rel_path = path.relative_to(PROJECT_DIR)
+        console.print(f"[dim]� 检测到变更: {rel_path}[/dim]")
+
+    def on_created(self, event):
+        self.on_modified(event)
+
+    def loop(self):
+        """主循环"""
+        observer = Observer()
+        observer.schedule(self, str(PROJECT_DIR), recursive=True)
+        observer.start()
+
+        console.print(f"[bold green]🚀 六脉神剑监视器已激活[/bold green]")
+        console.print(f"[dim]📁 监控目录: {PROJECT_DIR}[/dim]")
+        
+        try:
+            while self.running:
+                current_time = time.time()
+                
+                # 检查是否需要重启，并且防抖时间已过
+                if self.needs_restart and (current_time - self.last_change_time > DEBOUNCE_DELAY):
+                    self.needs_restart = False
+                    self.restart_application()
+                
+                time.sleep(0.1)
+                
+        except KeyboardInterrupt:
+            console.print("\n[bold red]🛑 系统下线...[/bold red]")
+        finally:
+            observer.stop()
+            observer.join()
+            self._kill_process()
 
 def main():
-    root_dir = os.path.dirname(os.path.abspath(__file__))
-    target_script = os.path.join(root_dir, "main.py")
-    
-    print(f"🔧 热重载模式已启动 | 监控目录: {root_dir}")
-    print(f"🚀 正在启动: {target_script}")
-    
-    process = None
-    last_mtimes = get_file_mtimes(root_dir)
-    
-    while True:
-        # 启动子进程
-        if process is None:
-            # 使用当前 Python 解释器启动 main.py
-            # 继承 stdin/stdout 以保留交互能力
-            process = subprocess.Popen([sys.executable, target_script])
-        
-        try:
-            time.sleep(1) # 每秒检查一次
-            
-            # 🔍 检测子进程是否异常退出
-            if process and process.poll() is not None:
-                ret = process.returncode
-                if ret != 0:
-                    print(f"\n[⚠️ 主程序异常退出，代码: {ret}] 正在等待代码修复...")
-                    process = None # 标记为 None，等待文件修改后重启
-                    # 不自动重启，直到用户修改了代码，防止死循环重启
-        except KeyboardInterrupt:
-            # 允许 Ctrl+C 退出 dev.py 本身
-            if process:
-                process.terminate()
-            print("\n👋 开发模式已退出")
-            break
-            
-        # 检查文件变化
-        try:
-            current_mtimes = get_file_mtimes(root_dir)
-            changed_files = []
-            
-            # 找出具体是哪个文件变了
-            if current_mtimes != last_mtimes:
-                # 检查新增或修改
-                for path, mtime in current_mtimes.items():
-                    if path not in last_mtimes or last_mtimes[path] != mtime:
-                        changed_files.append(path)
-                # 检查删除
-                for path in last_mtimes:
-                    if path not in current_mtimes:
-                        changed_files.append(f"{path} (deleted)")
-                        
-                if changed_files:
-                    print(f"\n[⚡ 触发重启的文件]: {', '.join(changed_files)}")
-                    print("[正在重载...]")
-                    
-                    if process:
-                        process.terminate()
-                        process.wait()
-                        process = None
-                    
-                    last_mtimes = current_mtimes
-                    
-                    # 只有在真重启时才清屏，避免报错信息被刷掉
-                    # os.system('cls' if os.name == 'nt' else 'clear')
-                
-        except Exception as e:
-            print(f"监控出错: {e}")
+    reloader = HotReloader()
+    reloader.loop()
 
 if __name__ == "__main__":
     main()

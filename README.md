@@ -1,103 +1,106 @@
-# 🤖 Gemini CLI 极客终端 (Gemini CLI Chatbot)
+# 🗡️ 六脉神剑真厉害 (Cyberpunk Gemini CLI)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Rich](https://img.shields.io/badge/UI-Rich-purple)](https://github.com/Textualize/rich)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Textual](https://img.shields.io/badge/framework-Textual-green.svg)
+![Gemini](https://img.shields.io/badge/AI-Gemini_2.0-magenta.svg)
 
-一个专为极客打造的高性能、沉浸式命令行聊天机器人。集成了 **Google Gemini** 与 **DeepSeek** 双引擎，拥有炫酷的动态仪表盘、实时资讯流和极致的交互体验。
+> **"赛博朋克风格的终端 AI 助手，集成实时系统监控与生活服务。"**
 
-![Screenshot](screenshot/封面.jpg)
-*(此处可替换为项目实际运行截图)*
+这是一个基于 Python **Textual** 框架构建的高级 TUI (终端用户界面) 应用。它不仅是一个支持流式对话的 AI 聊天机器人，更是一个集成了系统仪表盘、天气预报、科技新闻和极客运势的综合生产力工作台。
 
 ## ✨ 核心特性
 
-*   **⚡ 双核驱动**: 支持 **Google Gemini** (Pro/Flash) 与 **DeepSeek** (Coder/Chat) 模型无缝切换。
-*   **🎨 沉浸式 UI**: 基于 `Rich` 和 `Prompt Toolkit` 构建，拥有动态刷新率、打字机流式输出和代码高亮。
-*   **📰 智能资讯**: 
-    *   **实时天气**: 集成 Open-Meteo 与和风双源天气，精准预报。
-    *   **科技热榜**: 自动抓取 Hacker News 热门话题，并由 AI 实时生成中文摘要。
-    *   **每日运势**: 极客专属的“黄历”与星座运势。
-*   **🛠️ 开发者友好**:
-    *   支持完整的 Markdown 渲染与代码语法高亮。
-    *   智能命令补全 (IntelliSense-like)。
-    *   多线程异步架构，拒绝界面卡顿。
-*   **📡 网络优化**: 内置完善的代理支持 (HTTP/SOCKS5)，解决 API 连接问题。
+### 🤖 强力 AI 核心
+*   **多模型切换**: 支持 `gemini-2.5-flash`, `gemini-flash-latest` 等最新模型。
+*   **流式响应**: 类似黑客电影的打字机输出效果。
+*   **记忆对话**: 具备完整的上下文多轮对话能力。
+*   **智能重连**: 内置 API Key 轮询与自动重试机制，抗网络抖动。
+
+### 🎨 沉浸式体验
+*   **赛博朋克 UI**: 高对比度极客风格，支持 **Catppuccin** 四色主题 (Latte/Frappe/Macchiato/Mocha) 一键热切换。
+*   **内联输入**: 真正的终端命令行体验，支持多行编辑。
+*   **动态特效**: 包含 AI 思考波纹、故障风 (Glitch) 文本特效。
+
+### 🛠️ 极客工具箱 (Dashboard)
+*   **📊 系统监控**: 实时可视化 CPU、内存、GPU (NVIDIA)、磁盘 I/O 和网络流量。
+*   **☁️ 实时天气**: 集成 Open-Meteo，提供精确到分钟的本地天气与明日预报。
+*   **📰 科技新闻**: 自动抓取 Google News 科技版块，AI 自动翻译标题，滚动播报。
+*   **🔮 每日运势**: 程序员专属运势 (宜重构、忌上线)，每天根据哈希种子生成。
 
 ## 🚀 快速开始
 
-### 1. 克隆仓库
-```bash
-git clone https://github.com/HexBladeNB/Gemini_chatbot.git
-cd Gemini_chatbot
-```
+### 1. 环境准备
+确保你的系统安装了 Python 3.10 或更高版本。
 
-### 2. 安装依赖
-建议使用 Conda 或 venv 创建虚拟环境：
 ```bash
+# 克隆项目
+git clone https://github.com/your-repo/gemini-chatbot-textual.git
+cd gemini-chatbot-textual
+
+# 创建虚拟环境 (推荐)
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# Linux/Mac
+source .venv/bin/activate
+
+# 安装依赖
 pip install -r requirements.txt
 ```
 
-### 3. 环境配置
-复制配置文件模板并填入你的 API Key：
+### 2. 配置 API Key
+在项目根目录创建或修改 `config/settings.py` (或设置环境变量)，填入你的 Google Gemini API Key。
+
+### 3. 启动应用
 ```bash
-cp .env.example .env
-```
-编辑 `.env` 文件：
-```ini
-# Google Gemini API Key
-GEMINI_API_KEY=your_gemini_key_here
-
-# DeepSeek API Key (可选)
-DEEPSEEK_API_KEY=your_deepseek_key_here
-
-# 网络代理 (可选，如不需要请留空)
-HTTP_PROXY=http://127.0.0.1:7890
-HTTPS_PROXY=http://127.0.0.1:7890
+python app.py
 ```
 
-### 4. 启动终端
-```bash
-python main.py
-```
+## ⌨️ 操作指南
 
-## ⌨️ 指令手册
+应用支持 **Slash 指令** 和 **快捷键** 两种操作方式。
 
-在对话过程中，随时输入 `/` 呼出命令菜单：
-
-| 指令       | 功能描述                              |
-| :--------- | :------------------------------------ |
-| `/help`    | 📖 显示完整的帮助菜单                  |
-| `/model`   | 🔧 切换 AI 模型 (Gemini / DeepSeek)    |
-| `/check`   | 🏥 运行全能模型体检脚本 (网络/API诊断) |
-| `/weather` | 🌤️ 强制刷新天气数据                    |
-| `/refresh` | 🔄 也是清屏，彻底重绘 UI               |
-| `/save`    | 💾 手动保存当前对话记录                |
-| `/exit`    | 👋 安全退出程序                        |
+| 功能 | 指令 | 快捷键 | 说明 |
+| :--- | :--- | :--- | :--- |
+| **发送消息** | (直接输入) | `Enter` | 发送对话 |
+| **换行** | - | `Shift+Enter` | 输入框换行 |
+| **切换模型** | `/model` | - | 轮换 Gemini 模型 |
+| **切换服务** | `/service` | `Ctrl+D` | 切换主备服务 (GLM/Gemini) |
+| **切换主题** | `/theme` | `F12` | 轮换 Catppuccin 配色 |
+| **调整速度** | `/speed` | `Ctrl+S` | 调整打字机输出速度 |
+| **清屏** | `/clear` | `F2` | 清空屏幕日志 |
+| **重置** | `/reset` | `F5` | 清空屏幕 + **遗忘记忆** |
+| **帮助** | `/help` | - | 显示帮助菜单 |
+| **退出** | `/quit` | `Ctrl+Q` | 退出程序 |
 
 ## 📂 项目结构
 
 ```text
-Gemini_chatbot/
-├── commands/           # 指令处理逻辑
-├── config/             # 配置加载与环境变量
-├── core/               # LLM 核心客户端 (Gemini/DeepSeek)
-├── data/               # 缓存数据 (天气/新闻)
-├── ui/                 # 仪表盘与界面渲染
-├── utils/              # 工具库 (News/Weather/Fortune)
-├── main.py             # 程序主入口
-└── requirements.txt    # 项目依赖
+E:\Gemini CLI 实战\Gemini_chatbot- Textual\
+├── app.py                # 主程序入口
+├── core/                 # 核心逻辑
+│   ├── chat.py           # (旧版) CLI 对话逻辑
+│   └── client.py         # Gemini 客户端封装
+├── services/             # 服务层
+│   └── gemini_service.py # AI 服务 (流式处理/历史管理)
+├── ui/                   # (旧版) UI 组件
+├── widgets/              # Textual UI 组件
+│   ├── message_log.py    # 消息列表与输入框
+│   ├── status_bar.py     # 底部多功能状态栏
+│   └── glitch_label.py   # 特效标签
+├── utils/                # 工具库
+│   ├── system_monitor.py # 系统硬件监控
+│   ├── weather.py        # 天气 API
+│   ├── news.py           # 新闻 RSS + 翻译
+│   └── fortune.py        # 运势算法
+├── styles/               # CSS 样式表 (TCSS)
+└── themes_cloned/        # Catppuccin 主题资源
 ```
 
-## 🛠️ 技术栈
+## 🤝 贡献
+欢迎提交 Issue 或 PR！
+特别感谢 [Textual](https://github.com/Textualize/textual) 和 [Rich](https://github.com/Textualize/rich) 提供的底层支持。
 
-*   **Language**: Python 3.10+
-*   **UI Framework**: Rich, Prompt Toolkit
-*   **API SDK**: Google Generative AI, OpenAI (for DeepSeek)
-*   **Data Source**: Open-Meteo, Hacker News API
-
-## 🤝 贡献与反馈
-
-欢迎提交 Issue 或 Pull Request！如果你喜欢这个项目，请给它一个 ⭐️ Star！
-
----
-*Built with ❤️ by HexBladeNB*
+## 📜 许可证
+MIT License

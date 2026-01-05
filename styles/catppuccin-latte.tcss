@@ -1,0 +1,14 @@
+.theme-latte {
+    --bg-dark: #eff1f5;
+    --bg-panel: #e6e9ef;
+    --fg-main: #4c4f69;
+    --comment: #9ca0b0;
+    --purple: #8839ef;
+    --pink: #ea76cb;
+    --cyan: #04a5e5;
+    --green: #40a02b;
+    --orange: #fe640b;
+    --red: #d20f39;
+    --yellow: #df8e1d;
+    --surface0: #ccd0da;
+}

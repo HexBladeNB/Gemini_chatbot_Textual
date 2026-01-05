@@ -1,4 +1,3 @@
 # Core module
 from .client import get_client
-from .models import select_model
-from .chat import ChatSession
+from .zhipu_client import get_zhipu_client

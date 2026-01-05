@@ -1,0 +1,614 @@
+/* Generated Catppuccin Themes - Cyberpunk Container Style */
+
+/* === Catppuccin Latte === */
+.theme-latte {
+    background: #eff1f5;
+    color: #4c4f69;
+    /* 优化滚动条: 更细、交互更明显 */
+    scrollbar-color: #acb0be;
+    scrollbar-color-hover: #1e66f5;
+    scrollbar-color-active: #7287fd;
+    scrollbar-background: #eff1f5;
+    scrollbar-background-hover: #dce0e8;
+    scrollbar-background-active: #dce0e8;
+    scrollbar-corner-color: #dce0e8;
+    scrollbar-size-vertical: 1;
+    scrollbar-size-horizontal: 1;
+}
+
+/* Header Styling */
+.theme-latte Header {
+    background: #e6e9ef;
+    color: #8839ef;
+}
+
+.theme-latte HeaderTitle {
+    color: #8839ef;
+}
+
+/* Status Bar */
+.theme-latte #status-bar {
+    background: #e6e9ef;
+    color: #4c4f69;
+    border-top: heavy #9ca0b0; 
+}
+
+/* Common Bubble Container */
+.theme-latte .user-bubble-container, 
+.theme-latte .ai-bubble-container, 
+.theme-latte .system-bubble-container,
+.theme-latte .input-container {
+    margin: 1 2;
+    padding: 0 0; 
+    border: heavy #9ca0b0; 
+    background: transparent;
+    height: auto;
+    width: 100%; /* 恢复满宽，避免坍缩 */
+}
+
+.theme-latte .bubble-content {
+    height: auto;
+    width: 100%;
+    text-wrap: wrap; 
+    overflow: hidden;
+    padding: 0 1;
+}
+
+/* Bubble Headers */
+.theme-latte .bubble-header {
+    dock: top;
+    width: 100%;
+    background: #ccd0da;
+    color: #4c4f69;
+    padding: 0 1;
+    margin-bottom: 1; /* 标题栏与内容间距 */
+    text-style: bold;
+}
+
+/* Specific Styles per Role */
+
+/* User */
+.theme-latte .user-bubble-container {
+    border: heavy #ea76cb;
+}
+.theme-latte .user-header {
+    background: #ea76cb;
+    color: #eff1f5; /* Contrast text */
+}
+.theme-latte .user-bubble-container .bubble-content {
+    color: #ea76cb;
+    padding: 0 1;
+}
+
+/* AI */
+.theme-latte .ai-bubble-container {
+    border: heavy #04a5e5;
+}
+.theme-latte .ai-header {
+    background: #04a5e5;
+    color: #eff1f5;
+}
+.theme-latte .ai-bubble-container .bubble-content {
+    color: #04a5e5;
+    padding: 0 1;
+}
+
+/* System */
+.theme-latte .system-bubble-container {
+    border: dashed #9ca0b0;
+}
+.theme-latte .system-header {
+    background: #9ca0b0;
+    color: #eff1f5;
+}
+.theme-latte .system-bubble-container .bubble-content {
+    color: #9ca0b0;
+    padding: 0 1;
+}
+
+/* ERROR */
+.theme-latte .error-bubble {
+    color: #d20f39;
+}
+
+
+/* Input Container */
+.theme-latte .input-container {
+    border: heavy #40a02b;
+}
+.theme-latte .input-header {
+    background: #40a02b;
+    color: #eff1f5;
+}
+
+/* Inline Input Widget inside container */
+.theme-latte .inline-input {
+    background: transparent;
+    border: none;
+    color: #40a02b;
+    height: auto;
+    min-height: 1; /* 默认一行，输入多了自动扩展 */
+    padding: 0 0; /* TextArea 自带 padding */
+}
+.theme-latte .inline-input:focus {
+    background: transparent; 
+}
+
+/* TextArea 内部去黑底 */
+.theme-latte .inline-input > .text-area--cursor-line {
+    background: transparent;
+}
+.theme-latte .inline-input > .text-area--content {
+    background: transparent;
+}
+
+/* TextArea specific styling */
+.theme-latte .inline-input .text-area--cursor {
+    background: #40a02b;
+    color: #eff1f5;
+}
+
+/* Reconnecting Animation specific */
+.theme-latte .reconnecting {
+    color: #df8e1d;
+}
+
+/* === Catppuccin Frappé === */
+.theme-frappe {
+    background: #303446;
+    color: #c6d0f5;
+    /* 优化滚动条: 更细、交互更明显 */
+    scrollbar-color: #626880;
+    scrollbar-color-hover: #8caaee;
+    scrollbar-color-active: #babbf1;
+    scrollbar-background: #303446;
+    scrollbar-background-hover: #232634;
+    scrollbar-background-active: #232634;
+    scrollbar-corner-color: #232634;
+    scrollbar-size-vertical: 1;
+    scrollbar-size-horizontal: 1;
+}
+
+/* Header Styling */
+.theme-frappe Header {
+    background: #292c3c;
+    color: #ca9ee6;
+}
+
+.theme-frappe HeaderTitle {
+    color: #ca9ee6;
+}
+
+/* Status Bar */
+.theme-frappe #status-bar {
+    background: #292c3c;
+    color: #c6d0f5;
+    border-top: heavy #737994; 
+}
+
+/* Common Bubble Container */
+.theme-frappe .user-bubble-container, 
+.theme-frappe .ai-bubble-container, 
+.theme-frappe .system-bubble-container,
+.theme-frappe .input-container {
+    margin: 1 2;
+    padding: 0 0; 
+    border: heavy #737994; 
+    background: transparent;
+    height: auto;
+    width: 100%; /* 恢复满宽，避免坍缩 */
+}
+
+.theme-frappe .bubble-content {
+    height: auto;
+    width: 100%;
+    text-wrap: wrap; 
+    overflow: hidden;
+    padding: 0 1;
+}
+
+/* Bubble Headers */
+.theme-frappe .bubble-header {
+    dock: top;
+    width: 100%;
+    background: #414559;
+    color: #c6d0f5;
+    padding: 0 1;
+    margin-bottom: 1; /* 标题栏与内容间距 */
+    text-style: bold;
+}
+
+/* Specific Styles per Role */
+
+/* User */
+.theme-frappe .user-bubble-container {
+    border: heavy #f4b8e4;
+}
+.theme-frappe .user-header {
+    background: #f4b8e4;
+    color: #303446; /* Contrast text */
+}
+.theme-frappe .user-bubble-container .bubble-content {
+    color: #f4b8e4;
+    padding: 0 1;
+}
+
+/* AI */
+.theme-frappe .ai-bubble-container {
+    border: heavy #99d1db;
+}
+.theme-frappe .ai-header {
+    background: #99d1db;
+    color: #303446;
+}
+.theme-frappe .ai-bubble-container .bubble-content {
+    color: #99d1db;
+    padding: 0 1;
+}
+
+/* System */
+.theme-frappe .system-bubble-container {
+    border: dashed #737994;
+}
+.theme-frappe .system-header {
+    background: #737994;
+    color: #303446;
+}
+.theme-frappe .system-bubble-container .bubble-content {
+    color: #737994;
+    padding: 0 1;
+}
+
+/* ERROR */
+.theme-frappe .error-bubble {
+    color: #e78284;
+}
+
+
+/* Input Container */
+.theme-frappe .input-container {
+    border: heavy #a6d189;
+}
+.theme-frappe .input-header {
+    background: #a6d189;
+    color: #303446;
+}
+
+/* Inline Input Widget inside container */
+.theme-frappe .inline-input {
+    background: transparent;
+    border: none;
+    color: #a6d189;
+    height: auto;
+    min-height: 1; /* 默认一行，输入多了自动扩展 */
+    padding: 0 0; /* TextArea 自带 padding */
+}
+.theme-frappe .inline-input:focus {
+    background: transparent; 
+}
+
+/* TextArea 内部去黑底 */
+.theme-frappe .inline-input > .text-area--cursor-line {
+    background: transparent;
+}
+.theme-frappe .inline-input > .text-area--content {
+    background: transparent;
+}
+
+/* TextArea specific styling */
+.theme-frappe .inline-input .text-area--cursor {
+    background: #a6d189;
+    color: #303446;
+}
+
+/* Reconnecting Animation specific */
+.theme-frappe .reconnecting {
+    color: #e5c890;
+}
+
+/* === Catppuccin Macchiato === */
+.theme-macchiato {
+    background: #24273a;
+    color: #cad3f5;
+    /* 优化滚动条: 更细、交互更明显 */
+    scrollbar-color: #5b6078;
+    scrollbar-color-hover: #8aadf4;
+    scrollbar-color-active: #b7bdf8;
+    scrollbar-background: #24273a;
+    scrollbar-background-hover: #181926;
+    scrollbar-background-active: #181926;
+    scrollbar-corner-color: #181926;
+    scrollbar-size-vertical: 1;
+    scrollbar-size-horizontal: 1;
+}
+
+/* Header Styling */
+.theme-macchiato Header {
+    background: #1e2030;
+    color: #c6a0f6;
+}
+
+.theme-macchiato HeaderTitle {
+    color: #c6a0f6;
+}
+
+/* Status Bar */
+.theme-macchiato #status-bar {
+    background: #1e2030;
+    color: #cad3f5;
+    border-top: heavy #6e738d; 
+}
+
+/* Common Bubble Container */
+.theme-macchiato .user-bubble-container, 
+.theme-macchiato .ai-bubble-container, 
+.theme-macchiato .system-bubble-container,
+.theme-macchiato .input-container {
+    margin: 1 2;
+    padding: 0 0; 
+    border: heavy #6e738d; 
+    background: transparent;
+    height: auto;
+    width: 100%; /* 恢复满宽，避免坍缩 */
+}
+
+.theme-macchiato .bubble-content {
+    height: auto;
+    width: 100%;
+    text-wrap: wrap; 
+    overflow: hidden;
+    padding: 0 1;
+}
+
+/* Bubble Headers */
+.theme-macchiato .bubble-header {
+    dock: top;
+    width: 100%;
+    background: #363a4f;
+    color: #cad3f5;
+    padding: 0 1;
+    margin-bottom: 1; /* 标题栏与内容间距 */
+    text-style: bold;
+}
+
+/* Specific Styles per Role */
+
+/* User */
+.theme-macchiato .user-bubble-container {
+    border: heavy #f5bde6;
+}
+.theme-macchiato .user-header {
+    background: #f5bde6;
+    color: #24273a; /* Contrast text */
+}
+.theme-macchiato .user-bubble-container .bubble-content {
+    color: #f5bde6;
+    padding: 0 1;
+}
+
+/* AI */
+.theme-macchiato .ai-bubble-container {
+    border: heavy #91d7e3;
+}
+.theme-macchiato .ai-header {
+    background: #91d7e3;
+    color: #24273a;
+}
+.theme-macchiato .ai-bubble-container .bubble-content {
+    color: #91d7e3;
+    padding: 0 1;
+}
+
+/* System */
+.theme-macchiato .system-bubble-container {
+    border: dashed #6e738d;
+}
+.theme-macchiato .system-header {
+    background: #6e738d;
+    color: #24273a;
+}
+.theme-macchiato .system-bubble-container .bubble-content {
+    color: #6e738d;
+    padding: 0 1;
+}
+
+/* ERROR */
+.theme-macchiato .error-bubble {
+    color: #ed8796;
+}
+
+
+/* Input Container */
+.theme-macchiato .input-container {
+    border: heavy #a6da95;
+}
+.theme-macchiato .input-header {
+    background: #a6da95;
+    color: #24273a;
+}
+
+/* Inline Input Widget inside container */
+.theme-macchiato .inline-input {
+    background: transparent;
+    border: none;
+    color: #a6da95;
+    height: auto;
+    min-height: 1; /* 默认一行，输入多了自动扩展 */
+    padding: 0 0; /* TextArea 自带 padding */
+}
+.theme-macchiato .inline-input:focus {
+    background: transparent; 
+}
+
+/* TextArea 内部去黑底 */
+.theme-macchiato .inline-input > .text-area--cursor-line {
+    background: transparent;
+}
+.theme-macchiato .inline-input > .text-area--content {
+    background: transparent;
+}
+
+/* TextArea specific styling */
+.theme-macchiato .inline-input .text-area--cursor {
+    background: #a6da95;
+    color: #24273a;
+}
+
+/* Reconnecting Animation specific */
+.theme-macchiato .reconnecting {
+    color: #eed49f;
+}
+
+/* === Catppuccin Mocha === */
+.theme-mocha {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    /* 优化滚动条: 更细、交互更明显 */
+    scrollbar-color: #585b70;
+    scrollbar-color-hover: #89b4fa;
+    scrollbar-color-active: #b4befe;
+    scrollbar-background: #1e1e2e;
+    scrollbar-background-hover: #11111b;
+    scrollbar-background-active: #11111b;
+    scrollbar-corner-color: #11111b;
+    scrollbar-size-vertical: 1;
+    scrollbar-size-horizontal: 1;
+}
+
+/* Header Styling */
+.theme-mocha Header {
+    background: #181825;
+    color: #cba6f7;
+}
+
+.theme-mocha HeaderTitle {
+    color: #cba6f7;
+}
+
+/* Status Bar */
+.theme-mocha #status-bar {
+    background: #181825;
+    color: #cdd6f4;
+    border-top: heavy #6c7086; 
+}
+
+/* Common Bubble Container */
+.theme-mocha .user-bubble-container, 
+.theme-mocha .ai-bubble-container, 
+.theme-mocha .system-bubble-container,
+.theme-mocha .input-container {
+    margin: 1 2;
+    padding: 0 0; 
+    border: heavy #6c7086; 
+    background: transparent;
+    height: auto;
+    width: 100%; /* 恢复满宽，避免坍缩 */
+}
+
+.theme-mocha .bubble-content {
+    height: auto;
+    width: 100%;
+    text-wrap: wrap; 
+    overflow: hidden;
+    padding: 0 1;
+}
+
+/* Bubble Headers */
+.theme-mocha .bubble-header {
+    dock: top;
+    width: 100%;
+    background: #313244;
+    color: #cdd6f4;
+    padding: 0 1;
+    margin-bottom: 1; /* 标题栏与内容间距 */
+    text-style: bold;
+}
+
+/* Specific Styles per Role */
+
+/* User */
+.theme-mocha .user-bubble-container {
+    border: heavy #f5c2e7;
+}
+.theme-mocha .user-header {
+    background: #f5c2e7;
+    color: #1e1e2e; /* Contrast text */
+}
+.theme-mocha .user-bubble-container .bubble-content {
+    color: #f5c2e7;
+    padding: 0 1;
+}
+
+/* AI */
+.theme-mocha .ai-bubble-container {
+    border: heavy #89dceb;
+}
+.theme-mocha .ai-header {
+    background: #89dceb;
+    color: #1e1e2e;
+}
+.theme-mocha .ai-bubble-container .bubble-content {
+    color: #89dceb;
+    padding: 0 1;
+}
+
+/* System */
+.theme-mocha .system-bubble-container {
+    border: dashed #6c7086;
+}
+.theme-mocha .system-header {
+    background: #6c7086;
+    color: #1e1e2e;
+}
+.theme-mocha .system-bubble-container .bubble-content {
+    color: #6c7086;
+    padding: 0 1;
+}
+
+/* ERROR */
+.theme-mocha .error-bubble {
+    color: #f38ba8;
+}
+
+
+/* Input Container */
+.theme-mocha .input-container {
+    border: heavy #a6e3a1;
+}
+.theme-mocha .input-header {
+    background: #a6e3a1;
+    color: #1e1e2e;
+}
+
+/* Inline Input Widget inside container */
+.theme-mocha .inline-input {
+    background: transparent;
+    border: none;
+    color: #a6e3a1;
+    height: auto;
+    min-height: 1; /* 默认一行，输入多了自动扩展 */
+    padding: 0 0; /* TextArea 自带 padding */
+}
+.theme-mocha .inline-input:focus {
+    background: transparent; 
+}
+
+/* TextArea 内部去黑底 */
+.theme-mocha .inline-input > .text-area--cursor-line {
+    background: transparent;
+}
+.theme-mocha .inline-input > .text-area--content {
+    background: transparent;
+}
+
+/* TextArea specific styling */
+.theme-mocha .inline-input .text-area--cursor {
+    background: #a6e3a1;
+    color: #1e1e2e;
+}
+
+/* Reconnecting Animation specific */
+.theme-mocha .reconnecting {
+    color: #f9e2af;
+}
+
